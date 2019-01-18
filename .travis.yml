@@ -24,6 +24,7 @@ install:
   # Compensate for repo name being different to the role
   - ln -s ansible-role-cluster-nfs ../stackhpc.cluster-nfs
 
+script:
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
