@@ -1,6 +1,13 @@
 ---
-fstype: "xfs"
-disk_location: "/dev/null"
+#type of filesystem to create on disk
+nfs_fstype: "xfs"
+
+#target path to disk
+nfs_disk_location: "/dev/null"
+
+#Path to exported filesystem mountpoint on nfs servers
 nfs_export: "/srv"
-mnt_point: "/mnt"
+
+#Path to mountpoint on nfs clients
+nfs_client_mnt_point: "/mnt"
 ...
