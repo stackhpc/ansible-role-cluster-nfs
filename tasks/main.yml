@@ -1,6 +1,4 @@
 ---
-- debug:
-    var: nfs_enable
 - name: If nfs-server is present
   include: nfs-server.yml
   when: nfs_enable.server | bool

@@ -1,0 +1,6 @@
+---
+fstype: "xfs"
+disk_location: "/dev/null"
+nfs_export: "/srv"
+mnt_point: "/mnt"
+...

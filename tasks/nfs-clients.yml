@@ -10,6 +10,6 @@
 - name: mount the filesystem
   mount:
     path: "{{ mnt_point}}"
-    src: "{{ groups['nfs-server'] | first }}:{{ nfs_export }}"
+    src: "{{ nfs_server }}:{{ nfs_export }}"
     fstype: nfs
     state: mounted
