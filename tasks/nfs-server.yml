@@ -1,0 +1,30 @@
+---
+- name: install nfs-server packages
+  yum:
+    name: nfs-utils
+    state: present
+- name: ensure nfs service is running
+  service:
+    name: nfs-server
+    state: started
+    enabled: yes
+- name: create filesystem on disk
+  filesystem:
+    fstype: "{{ fstype }}"
+    dev: "{{ disk_location }}"
+- name: check if exported filesystem mountpoint
+  file:
+    path: "{{ nfs_export }}"
+    state: directory
+- name: mount filesystem
+  mount:
+    path: "{{ nfs_export }}"
+    src: "{{ disk_location }}"
+    fstype: "{{ fstype }}"
+    state: mounted
+- name: update exports file
+  lineinfile:
+    path: /etc/exports
+    regexp: "{{ nfs_export }}"
+    line: "{{ nfs_export }}   *(rw,insecure)"
+  notify: re-export filesystem

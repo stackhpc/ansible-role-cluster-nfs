@@ -1,0 +1,15 @@
+---
+- name: ensure nfs packages are installed
+  yum:
+    name: nfs-utils
+    state: present
+- name: check if mount directory exists
+  file:
+    path: "{{ mnt_point }}"
+    state: directory
+- name: mount the filesystem
+  mount:
+    path: "{{ mnt_point}}"
+    src: "{{ groups['nfs-server'] | first }}:{{ nfs_export }}"
+    fstype: nfs
+    state: mounted
