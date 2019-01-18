@@ -26,5 +26,7 @@
   lineinfile:
     path: /etc/exports
     regexp: "{{ nfs_export }}"
-    line: "{{ nfs_export }}   *(rw,insecure)"
+    line: "{{ nfs_export }}   *(rw,insecure,no_root_squash)"
   notify: re-export filesystem
+- name: flush handlers
+  meta: flush_handlers
