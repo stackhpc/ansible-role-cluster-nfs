@@ -2,8 +2,9 @@
 #type of filesystem to create on disk
 nfs_fstype: "xfs"
 
-#target path to disk
-nfs_disk_location: "/dev/null"
+#block device (disk) on which to create the exported filesystem.
+#if the disk is not defined, formatting and mounting will not be done.
+nfs_disk_location:
 
 #Path to exported filesystem mountpoint on nfs servers
 nfs_export: "/srv"
