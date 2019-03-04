@@ -3,30 +3,37 @@
   yum:
     name: nfs-utils
     state: present
-- name: ensure nfs service is running
-  service:
-    name: nfs-server
-    state: started
-    enabled: yes
-- name: create filesystem on disk
-  filesystem:
-    fstype: "{{ nfs_fstype }}"
-    dev: "{{ nfs_disk_location }}"
-- name: check if exported filesystem mountpoint
+
+- name: ensure exported path exists
   file:
     path: "{{ nfs_export }}"
     state: directory
-- name: mount filesystem
-  mount:
-    path: "{{ nfs_export }}"
-    src: "{{ nfs_disk_location }}"
-    fstype: "{{ nfs_fstype }}"
-    state: mounted
+
+- block:
+  - name: create filesystem on disk
+    filesystem:
+      fstype: "{{ nfs_fstype }}"
+      dev: "{{ nfs_disk_location }}"
+  - name: mount filesystem
+    mount:
+      path: "{{ nfs_export }}"
+      src: "{{ nfs_disk_location }}"
+      fstype: "{{ nfs_fstype }}"
+      state: mounted
+  when: nfs_disk_location is not none
+
 - name: update exports file
   lineinfile:
     path: /etc/exports
     regexp: "{{ nfs_export }}"
     line: "{{ nfs_export }}   *(rw,insecure,no_root_squash)"
   notify: re-export filesystem
+
+- name: ensure nfs service is running
+  service:
+    name: nfs-server
+    state: started
+    enabled: yes
+
 - name: flush handlers
   meta: flush_handlers
