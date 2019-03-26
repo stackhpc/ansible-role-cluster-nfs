@@ -38,6 +38,7 @@ Example Playbook
           nfs_enable:
             server: "{{ inventory_hostname in groups['nfs_server'] }}"
             clients: "{{ inventory_hostname in groups['nfs_clients'] }}"
+          nfs_export: "{{ hostvars['nfs_server']['nfs_export'] }}"
 
 
 Author Information
