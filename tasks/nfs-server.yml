@@ -20,6 +20,12 @@
       src: "{{ nfs_disk_location }}"
       fstype: "{{ nfs_fstype }}"
       state: mounted
+  - name: grow xfs filesystem to the maximum size
+    command: "xfs_growfs {{ nfs_export }}"
+    when: nfs_fstype == 'xfs'
+  - name: grow ext filesystem to the maximum size
+    command: "resize2fs {{ nfs_disk_location }}"
+    when: nfs_fstype == 'ext4'
   when: nfs_disk_location is not none
 
 - name: update exports file
