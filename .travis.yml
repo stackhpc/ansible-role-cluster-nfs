@@ -15,6 +15,9 @@ install:
   # Install ansible
   - pip install ansible
 
+  # Install yamllint
+  - pip install yamllint
+
   # Check ansible version
   - ansible --version
 
@@ -27,6 +30,9 @@ install:
 script:
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+
+  # yamllint checks
+  - yamllint .
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
