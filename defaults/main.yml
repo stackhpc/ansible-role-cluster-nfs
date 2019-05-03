@@ -8,6 +8,8 @@ nfs_disk_location:
 
 # Path to exported filesystem mountpoint on nfs servers
 nfs_export: "/srv"
+nfs_export_subnet: "*"
+nfs_export_options: "rw,insecure,no_root_squash"
 
 # Path to mountpoint on nfs clients
 nfs_client_mnt_point: "/mnt"
