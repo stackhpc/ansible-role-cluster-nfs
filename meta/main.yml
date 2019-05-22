@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  # role_name: cluster-nfs
+  role_name: nfs
   author: Holly Silk
   description: >
     Role for simple NFS server and client intended for Cluster-as-a-Service cloud deployments
