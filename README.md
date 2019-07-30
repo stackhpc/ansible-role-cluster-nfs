@@ -16,9 +16,16 @@ Role Variables
 
 `nfs_disk_location` is the target path to the disk.
 
+`nfs_server_hostname` is the hostname or IP of the nfs server 
+
 `nfs_export` is the path to exported filesystem mountpoint on the nfs server.
 
 `nfs_client_mnt_point` is the path to the mountpoint on the nfs clients.
+
+Groups
+------
+
+The groups `nfs_server` and `nfs_clients` must exist.
 
 Dependencies
 ------------
@@ -38,8 +45,6 @@ Example Playbook
           nfs_enable:
             server: "{{ inventory_hostname in groups['nfs_server'] }}"
             clients: "{{ inventory_hostname in groups['nfs_clients'] }}"
-          nfs_export: "{{ hostvars['nfs_server']['nfs_export'] }}"
-
 
 Author Information
 ------------------
