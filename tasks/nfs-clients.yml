@@ -7,9 +7,10 @@
   file:
     path: "{{ nfs_client_mnt_point }}"
     state: directory
+
 - name: mount the filesystem
   mount:
     path: "{{ nfs_client_mnt_point}}"
-    src: "{{ nfs_server }}:{{ nfs_export }}"
+    src: "{{ nfs_server_hostname }}:{{ nfs_export }}"
     fstype: nfs
     state: mounted
