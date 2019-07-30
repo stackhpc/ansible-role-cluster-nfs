@@ -16,11 +16,13 @@ Role Variables
 
 `nfs_disk_location` is the target path to the disk.
 
-`nfs_server_hostname` is the hostname or IP of the nfs server 
+`nfs_server_hostname` is the hostname or IP of the nfs server.
 
 `nfs_export` is the path to exported filesystem mountpoint on the nfs server.
 
 `nfs_client_mnt_point` is the path to the mountpoint on the nfs clients.
+
+If filesystem creation is not required then `nfs_fstype` and `nfs_disk_location` can be omitted.
 
 Groups
 ------
