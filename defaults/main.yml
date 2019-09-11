@@ -13,4 +13,7 @@ nfs_export_options: "rw,insecure,no_root_squash"
 
 # Path to mountpoint on nfs clients
 nfs_client_mnt_point: "/mnt"
+
+# nfs client mount options
+nfs_client_mnt_options:
 ...
