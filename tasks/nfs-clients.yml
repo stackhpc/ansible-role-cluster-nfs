@@ -11,5 +11,6 @@
   mount:
     path: "{{ nfs_client_mnt_point}}"
     src: "{{ nfs_server }}:{{ nfs_export }}"
+    opts: "{{ nfs_client_mnt_options }}"
     fstype: nfs
     state: mounted

@@ -20,6 +20,8 @@ Role Variables
 
 `nfs_client_mnt_point` is the path to the mountpoint on the nfs clients.
 
+`nfs_client_mnt_options` allows passing mount options to the NFS client.
+
 Dependencies
 ------------
 
