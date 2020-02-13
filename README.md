@@ -36,7 +36,7 @@ Example Playbook
       - nfs_clients
       become: yes
       roles:
-        - role: stackhpc.nfs-cluster
+        - role: stackhpc.nfs
           nfs_enable:
             server: "{{ inventory_hostname in groups['nfs_server'] }}"
             clients: "{{ inventory_hostname in groups['nfs_clients'] }}"
