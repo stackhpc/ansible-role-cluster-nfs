@@ -7,10 +7,15 @@
   file:
     path: "{{ nfs_client_mnt_point }}"
     state: directory
+- name: unmount existing nfs mounts if not the desired one
+  mount:
+    path: "{{ nfs_client_mnt_point }}"
+    state: absent
+  when: nfs_client_mnt_src not in nfs_current_mounts
 - name: mount the filesystem
   mount:
-    path: "{{ nfs_client_mnt_point}}"
-    src: "{{ nfs_server }}:{{ nfs_export }}"
+    path: "{{ nfs_client_mnt_point }}"
+    src: "{{ nfs_client_mnt_src }}"
     opts: "{{ nfs_client_mnt_options }}"
     fstype: nfs
     state: mounted

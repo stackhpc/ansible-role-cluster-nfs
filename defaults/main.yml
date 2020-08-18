@@ -16,4 +16,8 @@ nfs_client_mnt_point: "/mnt"
 
 # nfs client mount options
 nfs_client_mnt_options:
+nfs_client_mnt_src:  "{{ nfs_server }}:{{ nfs_export }}"
+
+# Current mounts mounted to the mount point
+nfs_current_mounts: "{{ ansible_mounts | selectattr('mount', 'equalto', nfs_client_mnt_point) | map(attribute='device') | list }}"
 ...
