@@ -13,4 +13,4 @@
     src: "{{ nfs_server }}:{{ nfs_export }}"
     opts: "{{ nfs_client_mnt_options }}"
     fstype: nfs
-    state: mounted
+    state: "{{ nfs_client_mnt_state }}"
