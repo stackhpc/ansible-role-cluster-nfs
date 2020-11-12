@@ -22,6 +22,9 @@ Role Variables
 
 `nfs_client_mnt_options` allows passing mount options to the NFS client.
 
+`nfs_client_mnt_state` desired state for the mount. As passed to the ansible `mount` builtin module. Can be one of: `absent`, `mounted`,
+`present`, `unmounted` or `remounted`. Defaults to `mounted`.
+
 `nfs_server` is the IP address or hostname of the NFS server.
 
 Dependencies
