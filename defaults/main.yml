@@ -18,4 +18,15 @@ nfs_client_mnt_point: "/mnt"
 nfs_client_mnt_options:
 
 nfs_client_mnt_state: mounted
+
+nfs_enable:
+  server: false
+  clients: false
+
+# have to supply a default "empty" config to allow mapping from nfs_configurations:
+nfs_configurations:
+  - nfs_enable:
+      server: false
+      clients: false
+
 ...

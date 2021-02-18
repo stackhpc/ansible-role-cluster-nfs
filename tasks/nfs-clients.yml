@@ -1,16 +1,13 @@
 ---
-- name: ensure nfs packages are installed
-  yum:
-    name: nfs-utils
-    state: present
+
 - name: check if mount directory exists
   file:
-    path: "{{ nfs_client_mnt_point }}"
+    path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
     state: directory
 - name: mount the filesystem
   mount:
-    path: "{{ nfs_client_mnt_point}}"
-    src: "{{ nfs_server }}:{{ nfs_export }}"
-    opts: "{{ nfs_client_mnt_options }}"
+    path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
+    src: "{{ item.get('nfs_server', nfs_server) }}:{{ item.get('nfs_export', nfs_export) }}"
+    opts: "{{ item['nfs_client_mnt_options'] | default(nfs_client_mnt_options, true) | default(omit, true) }}" # for some reason items.get() here fails with "an incorrect mount option was specified"
     fstype: nfs
-    state: "{{ nfs_client_mnt_state }}"
+    state: "{{ item.get('nfs_client_mnt_state', nfs_client_mnt_state) }}"
