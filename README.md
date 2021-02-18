@@ -28,6 +28,8 @@ builtin module. Can be one of: `absent`, `mounted`,`present`, `unmounted` or
 
 `nfs_server` is the IP address or hostname of the NFS server.
 
+`nfs_enable`: a mapping with keys `server` and `client` - values are bools determining the role of the host.
+
 Dependencies
 ------------
 
