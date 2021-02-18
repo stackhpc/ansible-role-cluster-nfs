@@ -12,19 +12,23 @@ None
 Role Variables
 --------------
 
-`nfs_fstype` is the type of filesystem to create on the disk.
+`nfs_fstype` is the type of filesystem to create on the disk. Optional, default "xfs".
 
 `nfs_disk_location` is the target path to the disk.
 
-`nfs_export` is the path to exported filesystem mountpoint on the NFS server.
+`nfs_export` is the path to exported filesystem mountpoint on the NFS server. Optional, default "/srv".
 
-`nfs_client_mnt_point` is the path to the mountpoint on the NFS clients.
+`nfs_export_subnet` is the host or network to which the export is shared. Optional, "*".
 
-`nfs_client_mnt_options` allows passing mount options to the NFS client.
+`nfs_export_options` are the options to apply to the export. Optional, default "rw,insecure,no_root_squash".
+
+`nfs_client_mnt_point` is the path to the mountpoint on the NFS clients. Optional, default "/mnt".
+
+`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default omits this.
 
 `nfs_client_mnt_state` desired state for the mount. As passed to the ansible `mount` 
-builtin module. Can be one of: `absent`, `mounted`,`present`, `unmounted` or 
-`remounted`. Defaults to `mounted`.
+builtin module. Can be one of `absent`, `mounted`,`present`, `unmounted` or 
+`remounted`. Optional, default `mounted`.
 
 `nfs_server` is the IP address or hostname of the NFS server.
 
