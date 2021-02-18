@@ -34,6 +34,8 @@ builtin module. Can be one of "absent", "mounted", "present", "unmounted" or
 
 `nfs_enable`: a mapping with keys `server` and `client` - values are bools determining the role of the host.
 
+Multiple NFS client/server configurations may be provided by defining `nfs_configurations`. This should be a list of mappings with keys/values are as per the variables above. Omitted keys/values are filled from the corresponding variable is used. For example if all configurations require the same non-default client mount options, define `nfs_client_mnt_options` and omit the key "nfs_client_mnt_options" from all configuration mappings.
+
 Dependencies
 ------------
 
