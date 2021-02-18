@@ -14,7 +14,7 @@ Role Variables
 
 `nfs_fstype` is the type of filesystem to create on the disk. Optional, default "xfs".
 
-`nfs_disk_location` is the target path to the disk.
+`nfs_disk_location` is the path to the block device on which to create a filesystem for export. Optional, default does not create a filesystem (e.g. as when exporting an existing directory).
 
 `nfs_export` is the path to exported filesystem mountpoint on the NFS server. Optional, default "/srv".
 
