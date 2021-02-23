@@ -7,10 +7,10 @@
 
 - name: If nfs-server is present
   include_tasks: nfs-server.yml
-  when: nfs_enable.server | bool or item.nfs_enable.server | bool
+  when: nfs_enable.server | bool or ('nfs_enable') in item and item.nfs_enable.server | bool
   loop: "{{ nfs_configurations }}"
 
 - name: If nfs-clients is present
   include_tasks: nfs-clients.yml
-  when: nfs_enable.clients | bool or item.nfs_enable.clients | bool
+  when: nfs_enable.clients | bool or ('nfs_enable' in item) and item.nfs_enable.clients | bool
   loop: "{{ nfs_configurations }}"
