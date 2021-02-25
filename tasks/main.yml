@@ -1,8 +1,16 @@
 ---
+
+- name: Install nfs packages
+  yum:
+    name: nfs-utils
+    state: present
+
 - name: If nfs-server is present
-  include: nfs-server.yml
-  when: nfs_enable.server | bool
+  include_tasks: nfs-server.yml
+  when: nfs_enable.server | bool or ('nfs_enable' in item and item.nfs_enable.server | bool)
+  loop: "{{ nfs_configurations }}"
 
 - name: If nfs-clients is present
-  include: nfs-clients.yml
-  when: nfs_enable.clients | bool
+  include_tasks: nfs-clients.yml
+  when: nfs_enable.clients | bool or ('nfs_enable' in item and item.nfs_enable.clients | bool)
+  loop: "{{ nfs_configurations }}"
