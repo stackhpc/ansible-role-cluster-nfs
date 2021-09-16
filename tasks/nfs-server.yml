@@ -53,7 +53,7 @@
 - name: ensure nfs service is running
   service:
     name: nfs-server
-    state: "{{ 'restarted' if nfs_conf.changed | default(false) else 'started' }}
+    state: "{{ 'restarted' if nfs_conf.changed | default(false) else 'started' }}"
     enabled: yes
 
 - name: flush handlers
