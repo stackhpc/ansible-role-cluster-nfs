@@ -14,14 +14,18 @@ nfs_export_options: "rw,insecure,no_root_squash"
 # Path to mountpoint on nfs clients
 nfs_client_mnt_point: "/mnt"
 
+# Enable NFS-over-RDMA:
+nfs_rdma: false
+
 # nfs client mount options
-nfs_client_mnt_options:
+nfs_client_mnt_options: "{{ 'rdma,port=20049' if nfs_rdma else ''}}"
 
 nfs_client_mnt_state: mounted
 
 nfs_enable:
   server: false
   clients: false
+
 
 # have to supply a default "empty" config to allow mapping from nfs_configurations:
 nfs_configurations:

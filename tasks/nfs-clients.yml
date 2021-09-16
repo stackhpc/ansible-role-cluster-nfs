@@ -1,13 +1,29 @@
 ---
 
+- block:
+  - name: Enable svcrdma module at boot
+    file:
+      path: /etc/modules-load.d/svcrdma.conf
+      state: touch
+      access_time: preserve
+      modification_time: preserve
+  - name: Load svcrdma module
+    community.general.modprobe:
+      name: svcrdma
+  when:  "item.get('nfs_rdma', nfs_rdma)"
+
 - name: check if mount directory exists
   file:
     path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
     state: directory
+
 - name: mount the filesystem
   mount:
     path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
     src: "{{ item.get('nfs_server', nfs_server) }}:{{ item.get('nfs_export', nfs_export) }}"
-    opts: "{{ item['nfs_client_mnt_options'] | default(nfs_client_mnt_options, true) | default(omit, true) }}" # for some reason items.get() here fails with "an incorrect mount option was specified"
+    opts: "{{ nfs_client_mount_opts_interpolated or omit }}" # mount is picky about how opts isn't provided
     fstype: nfs
     state: "{{ item.get('nfs_client_mnt_state', nfs_client_mnt_state) }}"
+  vars:
+    nfs_client_mount_opts_interpolated: "{{ item.get('nfs_client_mnt_options', nfs_client_mnt_options) }}"
+

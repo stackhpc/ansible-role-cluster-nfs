@@ -12,6 +12,8 @@ None
 Role Variables
 --------------
 
+`nfs_rdma`: bool, whether to use NFS-over-RDMA. Optional, default `false`.
+
 `nfs_fstype` is the type of filesystem to create on the disk. Optional, default "xfs".
 
 `nfs_disk_location` is the path to the block device on which to create a filesystem for export. Optional, default does not create a filesystem (e.g. as when exporting an existing directory).
@@ -20,11 +22,11 @@ Role Variables
 
 `nfs_export_subnet` is the host or network to which the export is shared. Optional, "*".
 
-`nfs_export_options` are the options to apply to the export. Optional, default "rw,insecure,no_root_squash".
+`nfs_export_options` are the options to apply to the export. Optional, default "rw,insecure,no_root_squash". Consider adding "async" to this is if enabling `nfs_rdma`.
 
 `nfs_client_mnt_point` is the path to the mountpoint on the NFS clients. Optional, default "/mnt".
 
-`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default omits this.
+`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default is either no options "rdma,port=20049" if `nfs_rdma` is true.
 
 `nfs_client_mnt_state` desired state for the mount. As passed to the ansible `mount` 
 builtin module. Can be one of "absent", "mounted", "present", "unmounted" or 
