@@ -22,7 +22,7 @@ Role Variables
 
 `nfs_export_subnet` is the host or network to which the export is shared. Optional, "*".
 
-`nfs_export_options` are the options to apply to the export. Optional, default "rw,insecure,no_root_squash". Consider adding "async" to this is if enabling `nfs_rdma`.
+`nfs_export_options` are the options to apply to the export. Optional, default "rw,insecure,no_root_squash".
 
 `nfs_client_mnt_point` is the path to the mountpoint on the NFS clients. Optional, default "/mnt".
 
