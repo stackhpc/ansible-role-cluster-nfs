@@ -26,7 +26,7 @@ Role Variables
 
 `nfs_client_mnt_point` is the path to the mountpoint on the NFS clients. Optional, default "/mnt".
 
-`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default is either no options "rdma,port=20049" if `nfs_rdma` is true.
+`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default is either no options or "rdma,port=20049" if `nfs_rdma` is true.
 
 `nfs_client_mnt_state` desired state for the mount. As passed to the ansible `mount` 
 builtin module. Can be one of "absent", "mounted", "present", "unmounted" or 
