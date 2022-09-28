@@ -13,7 +13,7 @@
         resizefs: true
     - name: mount filesystem
       mount:
-        path: "{{ item.get('nfs_export, nfs_export) }}"
+        path: "{{ item.get('nfs_export', nfs_export) }}"
         src: "{{ item.get('nfs_disk_location', nfs_disk_location) }}"
         fstype: "{{ item.get('nfs_fstype', nfs_fstype) }}"
         state: mounted
