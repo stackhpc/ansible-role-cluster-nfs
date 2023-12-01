@@ -1,6 +1,16 @@
 ---
 
 - name: check if mount directory exists
+  stat:
+    path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
+  register: _nfs_mountpoint
+  failed_when: false
+- name: unmount stale nfs mount
+  mount:
+    path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
+    state: unmounted
+  when: "'Stale file handle' in _nfs_mountpoint.msg | default('')"
+- name: ensure mount directory exists
   file:
     path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
     state: directory
