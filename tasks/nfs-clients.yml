@@ -5,8 +5,6 @@
     path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
   register: _nfs_mountpoint
   failed_when: false
-- debug:
-    var: _nfs_mountpoint
 - name: unmount stale nfs mount
   mount:
     path: "{{ item.get('nfs_client_mnt_point', nfs_client_mnt_point) }}"
