@@ -12,6 +12,8 @@ None
 Role Variables
 --------------
 
+`nfs_rdma`: bool, whether to use NFS-over-RDMA. Optional, default `false`.
+
 `nfs_fstype` is the type of filesystem to create on the disk. Optional, default "xfs".
 
 `nfs_disk_location` is the path to the block device on which to create a filesystem for export. Optional, default does not create a filesystem (e.g. as when exporting an existing directory).
@@ -24,7 +26,7 @@ Role Variables
 
 `nfs_client_mnt_point` is the path to the mountpoint on the NFS clients. Optional, default "/mnt".
 
-`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default omits this.
+`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default is either no options or "rdma,port=20049" if `nfs_rdma` is true.
 
 `nfs_client_mnt_state` desired state for the mount. As passed to the ansible `mount` 
 builtin module. Can be one of "absent", "mounted", "present", "unmounted" or 
