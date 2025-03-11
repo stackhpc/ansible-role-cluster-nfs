@@ -28,7 +28,8 @@
   lineinfile:
     path: /etc/exports
     regexp: "{{ item.get('nfs_export', nfs_export) }}"
-    line: "{{ item.get('nfs_export', nfs_export) }}   {{ item.get('nfs_export_subnet', nfs_export_subnet) }}({{ item.get('nfs_export_options', nfs_export_options) }})"
+    # uses -$OPTIONS format to set default options for all clients
+    line: "{{ item.get('nfs_export', nfs_export) }} -{{ item.get('nfs_export_options', nfs_export_options) }} {{ item.get('nfs_export_clients', nfs_export_clients) }}"
   notify: re-export filesystem
 
 - name: ensure nfs service is running

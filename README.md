@@ -18,7 +18,9 @@ Role Variables
 
 `nfs_export` is the path to exported filesystem mountpoint on the NFS server. Optional, default "/srv".
 
-`nfs_export_subnet` is the host or network to which the export is shared. Optional, "*".
+`nfs_export_clients` is the client list allowed to mount the filesystem.
+See "Machine Name Formats` in `man exports`. Optional string, default "*".
+Note that multiple clients may be specified as a space-separated string (not a yaml list).
 
 `nfs_export_options` are the options to apply to the export. Optional, default "rw,secure,root_squash".
 
@@ -44,6 +46,14 @@ None
 Example Playbook
 ----------------
 
+Assuming:
+- An inventory group `nfs_server` containing a single host
+- An inventory group `nfs_clients` containing one or more clients
+- The hostvar `ansible_host` containing hosts' IP address
+
+the example below configures a root-squashed read/write share which can only
+be mounted by the clients.
+
     ---
     - hosts:
       - nfs_server
@@ -55,7 +65,7 @@ Example Playbook
             server: "{{ inventory_hostname in groups['nfs_server'] }}"
             clients: "{{ inventory_hostname in groups['nfs_clients'] }}"
           nfs_server: "{{ hostvars['nfs_server']['ansible_host'] }}"
-
+          nfs_export_clients: "{{ groups['nfs_clients'] | map('extract', hostvars, 'ansible_host') | join(' ') }}"
 
 Author Information
 ------------------
