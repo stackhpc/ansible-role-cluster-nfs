@@ -26,7 +26,7 @@ Note that multiple clients may be specified as a space-separated string (not a y
 
 `nfs_client_mnt_point` is the path to the mountpoint on the NFS clients. Optional, default "/mnt".
 
-`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default omits this.
+`nfs_client_mnt_options` allows passing mount options to the NFS client. Optional, default "defaults,nosuid,nodev".
 
 `nfs_client_mnt_state` desired state for the mount. As passed to the ansible `mount` 
 builtin module. Can be one of "absent", "mounted", "present", "unmounted" or 
